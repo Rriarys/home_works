@@ -2,7 +2,7 @@
 {
     static void Main()
     {
-
+        //cycles and branching operators
         /*//print prime numbers from 1 to 100
 
         Console.Write("1, "); //1 делится нацело только на себя же, заносим сразу
