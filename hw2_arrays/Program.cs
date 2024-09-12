@@ -95,6 +95,11 @@
 
         int[] array = new int[size_arrray];
 
+        for (int i = 0; i < size_arrray; i++)
+        {
+            Console.Write($"\nEnter {i + 1} element: "); array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+
         while (true)
         {
             Console.WriteLine("""
@@ -103,6 +108,11 @@
             2) - Edit array
             3) - Add new element
             4) - Remove element
+            5) - Sort elements
+            6) - Reverse elements
+            7) - Show pare numbers
+            8) - Remove duplicates
+            9) - Check if palindrome
 
             """);
 
@@ -123,11 +133,11 @@
 
                 case 2: // EDIT
                     Console.Write("\nWhich element you want change, where 0 is index of the first one: "); int index_array = Convert.ToInt32(Console.ReadLine());
-                    
+
                     while (index_array < 0 || index_array > array.Length - 1)
                     {
                         Console.Write("\nWrong index!\n");
-                        Console.Write("\nWhich element you want change, where 0 is index of the first one: "); index_array = Convert.ToInt32(Console.ReadLine()); 
+                        Console.Write("\nWhich element you want change, where 0 is index of the first one: "); index_array = Convert.ToInt32(Console.ReadLine());
                     }
 
                     Console.Write($"Put new value for {index_array} INDEX: "); array[index_array] = Convert.ToInt32(Console.ReadLine());
@@ -164,6 +174,46 @@
                     array = tempArrayRem;
                     break;
                 //new cases
+                case 5: // SORT (BUBBLE)
+                    for (int i = 0; i < array.Length; i++) // проходим по массиву
+                    {
+                        for (int j = 0; j < array.Length - i; j++) // самый большой элемент "всплывет" первым в самый конец
+                        {                                          // дальше, мы уменьшаем проверку на колличество уже пройденых
+                            if (array[j] > array[j + 1])           // потому что в конец уходят самые большие из оставшихся чисел
+                            {
+                                int temp = array[j];
+                                array[j] = array[j + 1];
+                                array[j + 1] = temp; // меняем местами через дополнительную переменную
+                            }
+                        }
+
+                    }
+                    // еще раз выведу всь массив
+                    Console.Write("\nYour array: [");
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (i == array.Length - 1)
+                            Console.Write($"{array[i]}]\n");
+                        else
+                            Console.Write($"{array[i]}, ");
+                    }
+                    break;
+                case 6: // REVERSE
+
+
+
+                    break;
+                case 7: // NUMBERS % 2 == 0
+                    break;
+                case 8: // REMOVE DUPLICATES
+                    break;
+                case 9: // PALINDROME
+                    break;
+
+
+
+
+
 
             }
         }
