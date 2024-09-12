@@ -100,19 +100,28 @@
             Console.Write($"\nEnter {i + 1} element: "); array[i] = Convert.ToInt32(Console.ReadLine());
         }
 
+        Console.Write("\nYour array: [");
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (i == array.Length - 1)
+                Console.Write($"{array[i]}]\n");
+            else
+                Console.Write($"{array[i]}, ");
+        }
+
         while (true)
         {
             Console.WriteLine("""
 
-            1) - Show array
-            2) - Edit array
-            3) - Add new element
-            4) - Remove element
-            5) - Sort elements
-            6) - Reverse elements
-            7) - Show pare numbers
-            8) - Remove duplicates
-            9) - Check if palindrome
+            1 -> Show array
+            2 -> Edit array
+            3 -> Add new element
+            4 -> Remove element
+            5 -> Sort elements
+            6 -> Reverse elements
+            7 -> Show pare numbers
+            8 -> Remove duplicates
+            9 -> Check if palindrome
 
             """);
 
@@ -199,13 +208,76 @@
                     }
                     break;
                 case 6: // REVERSE
-
-
-
+                    for (int i = 0; i < array.Length / 2; i++) // будут сравниваться первый и последний элементы, попарно, значит достаточно пройтись до половины
+                    {
+                        int temp = array[i];
+                        array[i] = array[array.Length - 1 - i]; // - 1 - i => меняем с последним индексом, с учетом пройденых
+                        array[array.Length - 1 - i] = temp; // и первый ставим в конец
+                    }
+                    // еще раз вывожу массив
+                    Console.Write("\nYour array: [");
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (i == array.Length - 1)
+                            Console.Write($"{array[i]}]\n");
+                        else
+                            Console.Write($"{array[i]}, ");
+                    }
                     break;
                 case 7: // NUMBERS % 2 == 0
+                    Console.Write("\nYour array: [");
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (i == array.Length - 1)
+                            Console.Write($"{array[i]}]\n");
+                        else
+                            Console.Write($"{array[i]}, ");
+                    }
+
+                    Console.Write("\nPare numbers in array is: ");
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (array[i] % 2 == 0)
+                            Console.Write($"{array[i]} ");  
+                    }
                     break;
                 case 8: // REMOVE DUPLICATES
+                    int[] uniqArray = new int[array.Length]; // массив для хранения уникальных значений, не меньше чем основной
+
+                    int counter = 0; // счетчик уникальных, он же сдвиг, первый элемент (0 индекс) и т.д.
+
+                    for (int i = 0; i < array.Length; i++)
+                    {
+
+                        bool isDupl = false; // флажок, изначально полагаем что число не дубликат
+
+                        for (int j = 0; j < counter; j++) // нет смысла проверять то, чего нет, поэтому отталкиваюсь от имеющихся в новом массиве значений
+                        {
+                            if (array[i] == uniqArray[j])
+                            {
+                                isDupl = true; // значение уже встречалось
+                                break; // останавливаем
+                            }
+                        }
+
+                        if (!isDupl) // если число так и осталось с пометкой "не дубликат", значит это условие выполнится (станет true, хитрость)
+                        {            // а если в пред. цикле стало true, то это условие не выполнится вообще (будет false)
+                            uniqArray[counter] = array[i]; // counter был 0 -> он же индекс первого элемента
+                            counter++; // сдвигаемся в право, на след. индекс
+                        }
+                    }
+
+                    array = uniqArray; // возвращаем ссылку по старому адресу
+
+                    Console.Write("\nYour array: [");
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (i == array.Length - 1)
+                            Console.Write($"{array[i]}]\n");
+                        else
+                            Console.Write($"{array[i]}, ");
+                    }
+                    // ДОБАВИТЬ УДАЛЕНИЕ ПУСТЫХ
                     break;
                 case 9: // PALINDROME
                     break;
