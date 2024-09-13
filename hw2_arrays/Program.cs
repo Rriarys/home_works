@@ -83,7 +83,7 @@
 
 
 
-        //array menu
+        //array customization menu
 
         Console.Write("Write sie of array: "); int size_arrray = Convert.ToInt32(Console.ReadLine());
 
@@ -139,7 +139,6 @@
                             Console.Write($"{array[i]}, ");
                     }
                     break;
-
                 case 2: // EDIT
                     Console.Write("\nWhich element you want change, where 0 is index of the first one: "); int index_array = Convert.ToInt32(Console.ReadLine());
 
@@ -152,7 +151,6 @@
                     Console.Write($"Put new value for {index_array} INDEX: "); array[index_array] = Convert.ToInt32(Console.ReadLine());
 
                     break;
-
                 case 3: // ADD
                     Console.Write("\nPut value of new element: "); int new_elem = Convert.ToInt32(Console.ReadLine());
 
@@ -165,7 +163,6 @@
 
                     array = tempArray; // возвращаем ссылку от нового массива к старому адресу, старый утратит ссылку и будет стерт компилятором
                     break;
-
                 case 4: // REMOVE
                     Console.Write("\nWich element you want, where 0 is index of the first one: "); int index_rem = Convert.ToInt32(Console.ReadLine());
 
@@ -182,7 +179,6 @@
                     }
                     array = tempArrayRem;
                     break;
-                //new cases
                 case 5: // SORT (BUBBLE)
                     for (int i = 0; i < array.Length; i++) // проходим по массиву
                     {
@@ -277,16 +273,33 @@
                         else
                             Console.Write($"{array[i]}, ");
                     }
-                    // ДОБАВИТЬ УДАЛЕНИЕ ПУСТЫХ
                     break;
                 case 9: // PALINDROME
+                    bool isPalindrome = true; // flag
+
+                    for (int i = 0; i < array.Length / 2 ; i++) // достаточно пройти до половины, сравнение парами
+                    {
+                        if (array[i] != array[array.Length - 1 - i]) // сравниваем первый и последний
+                        {
+                            isPalindrome = false; // если нет сходства хоть по 1й паре, не палиндром
+                            break;
+                        }
+                    }
+
+                    Console.Write("\nYour array: [");
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        if (i == array.Length - 1)
+                            Console.Write($"{array[i]}]");
+                        else
+                            Console.Write($"{array[i]}, ");
+                    }
+
+                    if (isPalindrome)
+                        Console.Write(" -> is palindrome\n");
+                    else 
+                        Console.Write(" -> is not a palindrome\n");
                     break;
-
-
-
-
-
-
             }
         }
 
